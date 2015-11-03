@@ -1,6 +1,6 @@
 package logic;
 
-import typeOfBets.TypeOfBet;
+import logic.typeOfBets.TypeOfBet;
 
 public class Bet {
 	private int amount;

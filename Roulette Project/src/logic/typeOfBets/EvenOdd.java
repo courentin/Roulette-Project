@@ -1,6 +1,4 @@
-package logic;
-
-import logic.TypeOfBet;
+package logic.typeOfBets;
 
 public class EvenOdd extends TypeOfBet {
 	
