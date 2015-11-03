@@ -1,4 +1,4 @@
-package typeOfBets;
+package logic.typeOfBets;
 
 public class EvenOdd extends TypeOfBet {
 

@@ -1,4 +1,4 @@
-package typeOfBets;
+package logic.typeOfBets;
 
 abstract public class TypeOfBet {
 	private String name;
