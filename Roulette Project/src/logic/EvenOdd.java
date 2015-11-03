@@ -2,9 +2,7 @@ package logic;
 
 public class EvenOdd extends TypeOfBet {
 
-	public int getCorrectCases() {
-		
-	}
+	
 	
 	public boolean isWinnerNumber(int box)
 	{

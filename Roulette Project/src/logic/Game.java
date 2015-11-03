@@ -1,7 +1,10 @@
 package logic;
 
+import java.util.ArrayList;
+
 public class Game {
 	//ARRAY PLAYERS?
-	public static final int = 11;
+	ArrayList<Player> players;
+	
 
 }
