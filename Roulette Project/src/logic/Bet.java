@@ -1,4 +1,4 @@
-package src.logic;
+package logic;
 
 public class Bet {
 	private int amount;

@@ -17,6 +17,7 @@ public class Player {
 		this.color = color;
 		bets=new ArrayList<Bet>();
 		this.money = INITAL_MONEY;
+		
 	}
 
 
