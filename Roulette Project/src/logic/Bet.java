@@ -1,5 +1,5 @@
 package logic;
-
+//PRUEBA
 public class Bet {
 	private int amount;
 	private TypeOfBet typeOfBet;
