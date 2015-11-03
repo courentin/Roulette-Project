@@ -1,11 +1,19 @@
-package logic.typeOfBets;
+package logic;
+
+import logic.TypeOfBet;
 
 public class EvenOdd extends TypeOfBet {
+	
+	private boolean even;
 
-	
-	
-	public boolean isWinnerNumber(int box)
-	{
-		return box%2 == 0;
+	public EvenOdd(boolean type) {
+		even = type;
+	}
+
+	public boolean isWinnerNumber(int box) {
+		if(even)
+			return box%2 == 0;
+		else
+			return box%2 != 0;
 	}
 }
