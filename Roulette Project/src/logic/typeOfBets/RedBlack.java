@@ -13,6 +13,7 @@ public class RedBlack extends TypeOfBet {
 	public RedBlack(int color) throws IllegalArgumentException {
 		if(color != RED && color != BLACK) throw new IllegalArgumentException();
 		this.color = color;
+		this.coeficient = 1;
 	}
 
 	public boolean isWinnerNumber(int box) {

@@ -8,6 +8,7 @@ public class CornerBet extends TypeOfBet {
 	public CornerBet(HashSet<Integer> betBoxes) {
 		super();
 		this.betBoxes = betBoxes;
+		this.coeficient = 8;
 	}
 
 	@Override

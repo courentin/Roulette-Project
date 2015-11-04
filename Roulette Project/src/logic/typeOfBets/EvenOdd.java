@@ -10,6 +10,7 @@ public class EvenOdd extends TypeOfBet {
 	public EvenOdd(int type) throws IllegalArgumentException {
 		if(type != EVEN && type != ODD) throw new IllegalArgumentException();
 		this.type = type;
+		this.coeficient = 1;
 	}
 
 	public boolean isWinnerNumber(int box) {
