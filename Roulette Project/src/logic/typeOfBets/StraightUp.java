@@ -1,5 +1,7 @@
 package logic.typeOfBets;
 
+import logic.Number;
+
 public class StraightUp extends TypeOfBet {
 
 	private int number;
@@ -10,7 +12,7 @@ public class StraightUp extends TypeOfBet {
 		this.coeficient = 35;
 	}
 
-	public boolean isWinnerNumber(int box) {
-		return box == number;
+	public boolean isWinnerNumber(Number box) {
+		return box.getValue() == number;
 	}
 }
