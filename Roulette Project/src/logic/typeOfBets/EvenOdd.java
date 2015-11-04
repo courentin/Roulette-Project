@@ -1,5 +1,7 @@
 package logic.typeOfBets;
 
+import logic.Number;
+
 public class EvenOdd extends TypeOfBet {
 	
 	public static final int EVEN = 1;
@@ -13,10 +15,13 @@ public class EvenOdd extends TypeOfBet {
 		this.coeficient = 1;
 	}
 
-	public boolean isWinnerNumber(int box) {
+	public boolean isWinnerNumber(Number box) {
+		int value = box.getValue();
+
+		if(value == 0) return false;
 		if(type == EVEN)
-			return box%2 == 0;
+			return value%2 == 0;
 		else
-			return box%2 != 0;
+			return value%2 != 0;
 	}
 }
