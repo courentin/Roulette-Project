@@ -14,7 +14,7 @@ import logic.typeOfBets.TypeOfBet;
 public class Game {
 	private Player player;
 	private TypeOfBet[] betsAvailable;
-	
+	private ArrayList<Number> history;
 	
 	//ARRAY PLAYERS?
 	//ArrayList<Player> players;
@@ -23,9 +23,22 @@ public class Game {
 	public Game(String playerName,Color color) {
 		player=new Player(playerName,color);
 		betsAvailable=new TypeOfBet[5];
+		history = new ArrayList<>();
 		chargeBets();
 		
 	}
+	
+	public void turnTheWheel() {
+		Number number = new Number();
+		history.add(number);
+		player.executeBets(number);
+	}
+	
+	/*
+	public int[] getHotNumbers() {
+		
+	}
+	*/
 
 	private void chargeBets() {
 		betsAvailable[0]=new Column();

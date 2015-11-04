@@ -26,12 +26,7 @@ import javax.swing.JTextPane;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
 
 public class MainWindow extends JFrame {
 
@@ -49,9 +44,6 @@ public class MainWindow extends JFrame {
 	private JTextPane textPane;
 	private JComboBox cbTypeOfBet;
 	private JComboBox cbAuxTypeOfBet;
-	private JTextField jtStraightUp;
-	private JButton btnBet;
-	private JSpinner spAmount;
 
 	/**
 	 * Launch the application.
@@ -86,9 +78,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(getTextPane());
 		contentPane.add(getCbTypeOfBet());
 		contentPane.add(getCbAuxTypeOfBet());
-		contentPane.add(getBtnBet());
-		contentPane.add(getSpAmount());
-
+		
 		representStatus();
 	}
 
@@ -97,18 +87,18 @@ public class MainWindow extends JFrame {
 		if(this.game.getPlayer().getMoney()<=0){
 			JOptionPane.showMessageDialog(null,"Game Over");
 		}
-
-
+		
+		
 	}
 
 	private void representMoney() {
 		double money = game.getPlayer().getMoney();
 		this.tfMoney.setText(String.valueOf(money));
-
+		
 	}
-
+	
 	private void playGame(){
-
+		
 	}
 
 	private JMenuBar getMenuBar_1() {
@@ -203,33 +193,32 @@ public class MainWindow extends JFrame {
 		return cbTypeOfBet;
 	}
 	protected void showBetOptions(TypeOfBet betSelected) {		
-		showCbAux(betSelected);			
-
+			showCbAux(betSelected);			
+		
 	}
 	private void showCbAux(TypeOfBet betSelected) {
-		if(betSelected instanceof Column){
-			String[]cbAuxColumnsArray={"Column 0","Column 1","Column 2"};
-			cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxColumnsArray));
-			cbAuxTypeOfBet.setVisible(true);	
-		}
-		else if(betSelected instanceof CornerBet){
-			//thinking about it
-		}
-		else if(betSelected instanceof EvenOdd){
-			String[]cbAuxEvenOddArray={"Even","Odd"};
-			cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxEvenOddArray));
-			cbAuxTypeOfBet.setVisible(true);				
-		}
-		else if(betSelected instanceof RedBlack){
-			String[] cbAuxRedBlackArray={"Red","Black"};
-			cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxRedBlackArray));
-			cbAuxTypeOfBet.setVisible(true);
-		}
-		else if(betSelected instanceof StraightUp){
-			cbAuxTypeOfBet.setVisible(false);
-		}
-
-
+			if(betSelected instanceof Column){
+				String[]cbAuxColumnsArray={"Column 0","Column 1","Column 2"};
+				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxColumnsArray));
+				cbAuxTypeOfBet.setVisible(true);	
+			}
+			else if(betSelected instanceof CornerBet){
+				//thinking about it
+			}
+			else if(betSelected instanceof EvenOdd){
+				String[]cbAuxEvenOddArray={"Even","Odd"};
+				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxEvenOddArray));
+				cbAuxTypeOfBet.setVisible(true);				
+			}
+			else if(betSelected instanceof RedBlack){
+				String[] cbAuxRedBlackArray={"Red","Black"};
+				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxRedBlackArray));
+				cbAuxTypeOfBet.setVisible(true);
+			}
+			else if(betSelected instanceof StraightUp){
+				cbAuxTypeOfBet.setVisible(false);
+			}
+		
 	}
 
 	private JComboBox getCbAuxTypeOfBet() {
@@ -240,71 +229,5 @@ public class MainWindow extends JFrame {
 			cbAuxTypeOfBet.setBounds(167, 200, 114, 20);
 		}
 		return cbAuxTypeOfBet;
-	}
-	private JTextField getJtStraightUp() {
-		if (jtStraightUp == null) {
-			jtStraightUp = new JTextField();
-			jtStraightUp.setVisible(false);
-			jtStraightUp.addKeyListener(new KeyAdapter() {
-				public void keyTyped(KeyEvent e) {
-					char c = e.getKeyChar();
-					if (!((c >= '0') && (c <= '9') ||
-							(c == KeyEvent.VK_BACK_SPACE) ||
-							(c == KeyEvent.VK_DELETE))) {
-						getToolkit().beep();
-						e.consume();
-					}
-				}
-			});
-			jtStraightUp.setBounds(167, 200, 114, 20);
-			jtStraightUp.setColumns(10);
-		}
-		return jtStraightUp;
-	}
-	private JButton getBtnBet() {
-		if (btnBet == null) {
-			btnBet = new JButton("Bet");
-			btnBet.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					TypeOfBet betSelected = (TypeOfBet) cbTypeOfBet.getSelectedItem();
-					int amount = (int) spAmount.getValue();
-					if(betSelected instanceof Column){
-						((Column) betSelected).setColomnBeted(cbAuxTypeOfBet.getSelectedIndex());
-
-					}
-					else if (betSelected instanceof CornerBet){
-
-					}
-					else if(betSelected instanceof EvenOdd){
-						((EvenOdd)betSelected).setType(cbAuxTypeOfBet.getSelectedIndex());
-					}
-					else if(betSelected instanceof RedBlack){
-						String color=(String) cbAuxTypeOfBet.getSelectedItem();
-						if(color.equals("Red")){
-							((RedBlack)betSelected).setColor(Color.RED);
-						}
-						else if (color.equals("Black")){
-							((RedBlack)betSelected).setColor(Color.BLACK);
-						}
-					}
-					else if(betSelected instanceof StraightUp){
-						((StraightUp)betSelected).setNumber((int) cbAuxTypeOfBet.getSelectedItem());
-					}
-
-					game.getPlayer().doABet(amount, betSelected);
-					
-				}
-			});
-			btnBet.setBounds(109, 291, 89, 23);
-		}
-		return btnBet;
-	}
-	private JSpinner getSpAmount() {
-		if (spAmount == null) {
-			spAmount = new JSpinner();
-			spAmount.setModel(new SpinnerListModel(new String[] {"5", "10", "50", "100", "500", "1000"}));
-			spAmount.setBounds(117, 260, 69, 20);
-		}
-		return spAmount;
 	}
 }

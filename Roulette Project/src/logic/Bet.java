@@ -6,7 +6,6 @@ public class Bet {
 	private int amount;
 	private TypeOfBet typeOfBet;
 	private boolean isWinner;
-	private double moneyExpected;
 
 	public Bet(int amount, TypeOfBet typeOfBet) {
 		super();
@@ -33,13 +32,6 @@ public class Bet {
 		this.isWinner = isWinner;
 	}
 	public double getMoneyExpected() {
-		return moneyExpected;
+		return amount + typeOfBet.calcEarnings(amount);
 	}
-	public void setMoneyExpected(double moneyExpected) {
-		this.moneyExpected = moneyExpected;
-	}
-	
-	
-	
-
 }

@@ -72,16 +72,24 @@ public class Player {
 	}
 	
 	public Bet doABet(int amount, TypeOfBet typeOfBet) {
-		if(amount>=money){
-		Bet bet = new Bet(amount, typeOfBet);
-		bets.add(bet);
-		money=money-amount;
-		return bet;
+		if(amount<=money){
+			Bet bet = new Bet(amount, typeOfBet);
+			bets.add(bet);
+			money=money-amount;
+			return bet;
 		}
 		else{
 			throw new InvalidParameterException("You dont have money");
 		}
 		
+	}
+	
+	public void executeBets(Number number) {
+		for(Bet bet : bets) {
+			if(bet.getTypeOfBet().isWinnerNumber(number)) {
+				money += bet.getMoneyExpected();
+			}
+		}
 	}
 }
 
