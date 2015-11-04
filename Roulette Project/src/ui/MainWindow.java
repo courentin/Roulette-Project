@@ -34,6 +34,7 @@ public class MainWindow extends JFrame {
 	private JTextField tfMoney;
 	private JLabel lblPlayerName;
 	private Game game;
+	private JTextPane textPane;
 
 	/**
 	 * Launch the application.
@@ -57,7 +58,7 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		game=new Game("DefaultPlayer", Color.BLUE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 569, 437);
+		setBounds(100, 100, 676, 437);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,6 +66,7 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(getTfMoney());
 		contentPane.add(getLblPlayerName());
+		contentPane.add(getTextPane());
 		
 		representStatus();
 	}
@@ -143,7 +145,7 @@ public class MainWindow extends JFrame {
 			tfMoney = new JTextField();
 			tfMoney.setEditable(false);
 			tfMoney.setHorizontalAlignment(SwingConstants.CENTER);
-			tfMoney.setBounds(432, 36, 86, 20);
+			tfMoney.setBounds(561, 37, 86, 20);
 			tfMoney.setColumns(10);
 		}
 		return tfMoney;
@@ -153,8 +155,15 @@ public class MainWindow extends JFrame {
 			lblPlayerName = new JLabel(game.getPlayer().getName());
 			lblPlayerName.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPlayerName.setForeground(game.getPlayer().getColor());
-			lblPlayerName.setBounds(432, 11, 81, 14);
+			lblPlayerName.setBounds(566, 12, 81, 14);
 		}
 		return lblPlayerName;
+	}
+	private JTextPane getTextPane() {
+		if (textPane == null) {
+			textPane = new JTextPane();
+			textPane.setBounds(431, 163, 199, 121);
+		}
+		return textPane;
 	}
 }
