@@ -211,7 +211,13 @@ public class MainWindow extends JFrame {
 				cbAuxTypeOfBet.setVisible(true);				
 			}
 			else if(betSelected.equals("RedBlack")){
-				//String cbAuxRedBlackArray={""
+				String[] cbAuxRedBlackArray={"Red","Black"};
+				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxRedBlackArray));
+				cbAuxTypeOfBet.setVisible(true);
+			}
+			else if(betSelected.equals("StraighUp")){
+				cbAuxTypeOfBet.setVisible(false);
+				
 			}
 			
 		
