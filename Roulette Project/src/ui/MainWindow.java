@@ -55,6 +55,8 @@ public class MainWindow extends JFrame {
 	private JButton btnNoMoreBets;
 	private logic.Number number;
 	private JTextField tfNumber;
+	private JTextPane txEvenOdd;
+	private JTextPane txRedBlack;
 
 
 	/**
@@ -94,6 +96,8 @@ public class MainWindow extends JFrame {
 		contentPane.add(getSpAmount());
 		contentPane.add(getBtnNoMoreBets());
 		contentPane.add(getTfNumber());
+		contentPane.add(getTxEvenOdd());
+		contentPane.add(getTxRedBlack());
 
 		representStatus();
 	}
@@ -189,7 +193,7 @@ public class MainWindow extends JFrame {
 	private JTextPane getTxBets() {
 		if (txBets == null) {
 			txBets = new JTextPane();
-			txBets.setBounds(431, 163, 199, 121);
+			txBets.setBounds(424, 93, 199, 121);
 		}
 		return txBets;
 	}
@@ -331,6 +335,8 @@ public class MainWindow extends JFrame {
 					
 					btnNoMoreBets.setEnabled(false);
 					representMoney();
+					txRedBlack.setText(game.getRedBlackStatistics().toString());
+					txEvenOdd.setText(game.getEvenOddStatistics().toString());
 					
 				}
 			});
@@ -346,5 +352,19 @@ public class MainWindow extends JFrame {
 			tfNumber.setColumns(10);
 		}
 		return tfNumber;
+	}
+	private JTextPane getTxEvenOdd() {
+		if (txEvenOdd == null) {
+			txEvenOdd = new JTextPane();
+			txEvenOdd.setBounds(424, 251, 86, 48);
+		}
+		return txEvenOdd;
+	}
+	private JTextPane getTxRedBlack() {
+		if (txRedBlack == null) {
+			txRedBlack = new JTextPane();
+			txRedBlack.setBounds(537, 251, 86, 48);
+		}
+		return txRedBlack;
 	}
 }
