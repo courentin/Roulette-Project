@@ -3,6 +3,8 @@ package logic;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import logic.typeOfBets.TypeOfBet;
+
 public class Player {
 	public static final int INITAL_MONEY = 500;
 	private String name;
@@ -15,7 +17,7 @@ public class Player {
 		super();
 		this.name = name;
 		this.color = color;
-		bets=new ArrayList<Bet>();
+		bets = new ArrayList<Bet>();
 		this.money = INITAL_MONEY;
 		
 	}
@@ -60,8 +62,18 @@ public class Player {
 		this.money = money;
 	}
 	
+	public void addMoney(double money) {
+		this.money += money;
+	}
 	
+	public void subMoney(double money) {
+		this.money -= money;
+	}
 	
-	
+	public Bet bet(int amount, TypeOfBet typeOfBet) {
+		Bet bet = new Bet(amount, typeOfBet);
+		bets.add(bet);
+		return bet;
+	}
 }
 

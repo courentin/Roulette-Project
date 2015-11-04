@@ -7,14 +7,13 @@ public class Bet {
 	private TypeOfBet typeOfBet;
 	private boolean isWinner;
 	private double moneyExpected;
-	public Bet(int amount, TypeOfBet typeOfBet, boolean isWinner,
-			double moneyExpected) {
+
+	public Bet(int amount, TypeOfBet typeOfBet) {
 		super();
 		this.amount = amount;
 		this.typeOfBet = typeOfBet;
-		this.isWinner = isWinner;
-		this.moneyExpected = moneyExpected;
 	}
+
 	public int getAmount() {
 		return amount;
 	}

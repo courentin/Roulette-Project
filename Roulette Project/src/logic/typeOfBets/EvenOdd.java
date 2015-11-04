@@ -2,14 +2,18 @@ package logic.typeOfBets;
 
 public class EvenOdd extends TypeOfBet {
 	
-	private boolean even;
+	public static final int EVEN = 1;
+	public static final int ODD  = 2;
 
-	public EvenOdd(boolean type) {
-		even = type;
+	private int type;
+
+	public EvenOdd(int type) throws IllegalArgumentException {
+		if(type != EVEN && type != ODD) throw new IllegalArgumentException();
+		this.type = type;
 	}
 
 	public boolean isWinnerNumber(int box) {
-		if(even)
+		if(type == EVEN)
 			return box%2 == 0;
 		else
 			return box%2 != 0;
