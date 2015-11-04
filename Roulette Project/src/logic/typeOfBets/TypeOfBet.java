@@ -7,6 +7,10 @@ abstract public class TypeOfBet {
 	protected double coeficient;
 	private int numbers;
 
+	public TypeOfBet() {
+		this.name = this.getClass().getName();
+	}
+
 	abstract public boolean isWinnerNumber(Number box); 
 	/**
 	 * Calculate the gain resulting from the bet and adds the amount wagered
