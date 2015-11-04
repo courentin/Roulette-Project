@@ -34,8 +34,6 @@ public class MainWindow extends JFrame {
 	private JTextField tfMoney;
 	private JLabel lblPlayerName;
 	private Game game;
-	private JTextPane textPane;
-	private JScrollBar scrollBar;
 
 	/**
 	 * Launch the application.
@@ -67,8 +65,6 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(getTfMoney());
 		contentPane.add(getLblPlayerName());
-		contentPane.add(getTextPane());
-		contentPane.add(getScrollBar());
 		
 		representStatus();
 	}
@@ -147,7 +143,7 @@ public class MainWindow extends JFrame {
 			tfMoney = new JTextField();
 			tfMoney.setEditable(false);
 			tfMoney.setHorizontalAlignment(SwingConstants.CENTER);
-			tfMoney.setBounds(323, 39, 86, 20);
+			tfMoney.setBounds(432, 36, 86, 20);
 			tfMoney.setColumns(10);
 		}
 		return tfMoney;
@@ -157,22 +153,8 @@ public class MainWindow extends JFrame {
 			lblPlayerName = new JLabel(game.getPlayer().getName());
 			lblPlayerName.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPlayerName.setForeground(game.getPlayer().getColor());
-			lblPlayerName.setBounds(328, 24, 81, 14);
+			lblPlayerName.setBounds(432, 11, 81, 14);
 		}
 		return lblPlayerName;
-	}
-	private JTextPane getTextPane() {
-		if (textPane == null) {
-			textPane = new JTextPane();
-			textPane.setBounds(276, 84, 133, 90);
-		}
-		return textPane;
-	}
-	private JScrollBar getScrollBar() {
-		if (scrollBar == null) {
-			scrollBar = new JScrollBar();
-			scrollBar.setBounds(392, 102, 17, 48);
-		}
-		return scrollBar;
 	}
 }
