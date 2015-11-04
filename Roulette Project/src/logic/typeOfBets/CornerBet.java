@@ -3,10 +3,17 @@ package logic.typeOfBets;
 import java.util.HashSet;
 
 public class CornerBet extends TypeOfBet {
-	
-	
-	public boolean isWinnerNumber(HashSet<Integer> betBoxes,int box) {
+	HashSet<Integer>betBoxes;
+
+	public CornerBet(HashSet<Integer> betBoxes) {
+		super();
+		this.betBoxes = betBoxes;
+	}
+
+	@Override
+	public boolean isWinnerNumber(int box) {
 		return betBoxes.contains(box);
+		
 	}
 	
 
