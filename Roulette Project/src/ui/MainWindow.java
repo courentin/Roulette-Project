@@ -15,11 +15,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import javax.swing.JScrollBar;
+import javax.swing.JComboBox;
 
 public class MainWindow extends JFrame {
 
@@ -35,6 +37,9 @@ public class MainWindow extends JFrame {
 	private JLabel lblPlayerName;
 	private Game game;
 	private JTextPane textPane;
+	private JComboBox cbTypeOfBet;
+	private JComboBox cbAmount;
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -67,6 +72,9 @@ public class MainWindow extends JFrame {
 		contentPane.add(getTfMoney());
 		contentPane.add(getLblPlayerName());
 		contentPane.add(getTextPane());
+		contentPane.add(getCbTypeOfBet());
+		contentPane.add(getCbAmount());
+		contentPane.add(getComboBox());
 		
 		representStatus();
 	}
@@ -165,5 +173,27 @@ public class MainWindow extends JFrame {
 			textPane.setBounds(431, 163, 199, 121);
 		}
 		return textPane;
+	}
+	private JComboBox getCbTypeOfBet() {
+		if (cbTypeOfBet == null) {
+			cbTypeOfBet = new JComboBox<String>();
+			cbTypeOfBet.setModel(new DefaultComboBoxModel<String>(game.getBetsAvailable()));
+			cbTypeOfBet.setBounds(92, 202, 106, 20);
+		}
+		return cbTypeOfBet;
+	}
+	private JComboBox getCbAmount() {
+		if (cbAmount == null) {
+			cbAmount = new JComboBox();
+			cbAmount.setBounds(92, 246, 106, 20);
+		}
+		return cbAmount;
+	}
+	private JComboBox getComboBox() {
+		if (comboBox == null) {
+			comboBox = new JComboBox();
+			comboBox.setBounds(92, 292, 106, 20);
+		}
+		return comboBox;
 	}
 }
