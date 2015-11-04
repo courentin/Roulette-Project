@@ -28,10 +28,11 @@ public class Game {
 		
 	}
 	
-	public void turnTheWheel() {
+	public Number turnTheWheel() {
 		Number number = new Number();
 		history.add(number);
 		player.executeBets(number);
+		return number;
 	}
 	
 	/*
