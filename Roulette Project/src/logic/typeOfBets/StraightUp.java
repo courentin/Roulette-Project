@@ -6,14 +6,14 @@ public class StraightUp extends TypeOfBet {
 
 	private int number;
 
-	public StraightUp(int number) throws IllegalArgumentException {
-		if(number < 0 || number > 36) throw new IllegalArgumentException();
-		this.number = number;
+	public StraightUp() {
+		super();
 		this.coeficient = 35;
 	}
-
-	public StraightUp() {
-		// TODO Auto-generated constructor stub
+	
+	public void setNumber(int number) throws IllegalArgumentException {
+		if(number < 0 || number > 36) throw new IllegalArgumentException();
+		this.number = number;
 	}
 
 	public boolean isWinnerNumber(Number box) {

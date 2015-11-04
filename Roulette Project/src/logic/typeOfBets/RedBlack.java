@@ -1,22 +1,20 @@
 package logic.typeOfBets;
 
 import java.awt.Color;
-import java.util.Arrays;
-import java.util.HashSet;
 import logic.Number;
 
 public class RedBlack extends TypeOfBet {
 
 	private Color color;
-	
-	public RedBlack(Color color) throws IllegalArgumentException {
-		if(color != Color.RED && color != Color.BLACK) throw new IllegalArgumentException();
-		this.color = color;
+
+	public RedBlack() {
+		super();
 		this.coeficient = 1;
 	}
 
-	public RedBlack() {
-		// TODO Auto-generated constructor stub
+	public void setColor(Color color) throws IllegalArgumentException {
+		if(color != Color.RED && color != Color.BLACK) throw new IllegalArgumentException();
+		this.color = color;
 	}
 
 	public boolean isWinnerNumber(Number box) {

@@ -9,14 +9,14 @@ public class EvenOdd extends TypeOfBet {
 
 	private int type;
 
-	public EvenOdd(int type) throws IllegalArgumentException {
-		if(type != EVEN && type != ODD) throw new IllegalArgumentException();
-		this.type = type;
+	public EvenOdd() {
+		super();
 		this.coeficient = 1;
 	}
-
-	public EvenOdd() {
-		// TODO Auto-generated constructor stub
+	
+	public void setType(int type) throws IllegalArgumentException {
+		if(type != EVEN && type != ODD) throw new IllegalArgumentException();
+		this.type = type;
 	}
 
 	public boolean isWinnerNumber(Number box) {
