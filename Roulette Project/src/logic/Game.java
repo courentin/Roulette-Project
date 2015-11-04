@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logic.typeOfBets.Column;
+import logic.typeOfBets.CornerBet;
+import logic.typeOfBets.EvenOdd;
+import logic.typeOfBets.RedBlack;
+import logic.typeOfBets.StraightUp;
 import logic.typeOfBets.TypeOfBet;
 
 public class Game {
@@ -25,10 +29,10 @@ public class Game {
 
 	private void chargeBets() {
 		betsAvailable[0]=new Column();
-//		betsAvailable[1]=("CornerBet");
-//		betsAvailable[2]=("EvenOdd");
-//		betsAvailable[3]=("RedBlack");
-//		betsAvailable[4]=("StraightUp");		
+		betsAvailable[1]=new CornerBet();
+		betsAvailable[2]=new EvenOdd();
+		betsAvailable[3]=new RedBlack();
+		betsAvailable[4]=new StraightUp();		
 	}
 
 	public Player getPlayer() {

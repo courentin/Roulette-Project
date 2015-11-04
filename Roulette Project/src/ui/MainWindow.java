@@ -211,7 +211,7 @@ public class MainWindow extends JFrame {
 				cbAuxTypeOfBet.setVisible(true);				
 			}
 			else if(betSelected.equals("RedBlack")){
-				String cbAuxRedBlackArray={""
+				//String cbAuxRedBlackArray={""
 			}
 			
 		

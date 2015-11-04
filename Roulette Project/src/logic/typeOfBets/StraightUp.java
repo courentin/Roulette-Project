@@ -12,6 +12,10 @@ public class StraightUp extends TypeOfBet {
 		this.coeficient = 35;
 	}
 
+	public StraightUp() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean isWinnerNumber(Number box) {
 		return box.getValue() == number;
 	}

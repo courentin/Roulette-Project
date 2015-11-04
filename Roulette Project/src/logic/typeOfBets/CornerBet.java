@@ -12,6 +12,10 @@ public class CornerBet extends TypeOfBet {
 		this.coeficient = 8;
 	}
 
+	public CornerBet() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean isWinnerNumber(Number box) {
 		return betBoxes.contains(box.getValue());	

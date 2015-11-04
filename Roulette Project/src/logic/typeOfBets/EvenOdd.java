@@ -15,6 +15,10 @@ public class EvenOdd extends TypeOfBet {
 		this.coeficient = 1;
 	}
 
+	public EvenOdd() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean isWinnerNumber(Number box) {
 		int value = box.getValue();
 

@@ -15,6 +15,10 @@ public class RedBlack extends TypeOfBet {
 		this.coeficient = 1;
 	}
 
+	public RedBlack() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean isWinnerNumber(Number box) {
 		if(color == Color.RED)
 			return box.getColor() == Color.RED;
