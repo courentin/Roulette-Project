@@ -6,7 +6,7 @@ public class Box {
 	private int number;
 	private int column;
 	private Color color;
-	private boolean isBetted;
+	private int moneyBeted;
 	public Box(int number,Color color,int column){
 		this.number=number;
 		this.color=color;
