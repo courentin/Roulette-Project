@@ -71,7 +71,7 @@ public class Player {
 		this.money -= money;
 	}
 	
-	public Bet makeBet(int amount, TypeOfBet typeOfBet) {
+	public Bet doABet(int amount, TypeOfBet typeOfBet) {
 		if(amount>=money){
 		Bet bet = new Bet(amount, typeOfBet);
 		bets.add(bet);

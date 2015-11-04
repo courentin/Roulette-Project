@@ -50,6 +50,9 @@ public class Game {
 	public void setBetsAvailable(TypeOfBet[] betsAvailable) {
 		this.betsAvailable = betsAvailable;
 	}
+
+
+	
 	
 	
 	

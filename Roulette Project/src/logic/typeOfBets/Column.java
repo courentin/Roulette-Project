@@ -17,5 +17,8 @@ public class Column extends TypeOfBet {
 	
 	public boolean isWinnerNumber(Number box) {
 		return columnBeted == box.getColumn();
-	}	
+	}
+
+	
+	
 }
