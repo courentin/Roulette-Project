@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 import logic.Game;
 
 import javax.swing.JMenuBar;
@@ -22,6 +24,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindow extends JFrame {
 
@@ -38,8 +42,7 @@ public class MainWindow extends JFrame {
 	private Game game;
 	private JTextPane textPane;
 	private JComboBox cbTypeOfBet;
-	private JComboBox cbAmount;
-	private JComboBox comboBox;
+	private JComboBox cbAuxTypeOfBet;
 
 	/**
 	 * Launch the application.
@@ -73,8 +76,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(getLblPlayerName());
 		contentPane.add(getTextPane());
 		contentPane.add(getCbTypeOfBet());
-		contentPane.add(getCbAmount());
-		contentPane.add(getComboBox());
+		contentPane.add(getCbAuxTypeOfBet());
 		
 		representStatus();
 	}
@@ -177,23 +179,50 @@ public class MainWindow extends JFrame {
 	private JComboBox getCbTypeOfBet() {
 		if (cbTypeOfBet == null) {
 			cbTypeOfBet = new JComboBox<String>();
+			cbTypeOfBet.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String betSelected = String.valueOf(cbTypeOfBet.getSelectedItem());
+					showBetOptions(betSelected);
+				}
+			});
 			cbTypeOfBet.setModel(new DefaultComboBoxModel<String>(game.getBetsAvailable()));
-			cbTypeOfBet.setBounds(92, 202, 106, 20);
+			cbTypeOfBet.setBounds(26, 200, 106, 20);
 		}
 		return cbTypeOfBet;
 	}
-	private JComboBox getCbAmount() {
-		if (cbAmount == null) {
-			cbAmount = new JComboBox();
-			cbAmount.setBounds(92, 246, 106, 20);
-		}
-		return cbAmount;
+	protected void showBetOptions(String betSelected) {		
+			showCbAux(betSelected);			
+		
 	}
-	private JComboBox getComboBox() {
-		if (comboBox == null) {
-			comboBox = new JComboBox();
-			comboBox.setBounds(92, 292, 106, 20);
+	private void showCbAux(String betSelected) {
+			if(betSelected.equals("Column")){
+				String[]cbAuxColumnsArray={"Column 0","Column 1","Column 2"};
+				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxColumnsArray));
+				cbAuxTypeOfBet.setVisible(true);	
+			}
+			else if(betSelected.equals("CornerBet")){
+				//thinking about it
+				
+			}
+			else if(betSelected.equals("EvenOdd")){
+				String[]cbAuxEvenOddArray={"Even","Odd"};
+				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxEvenOddArray));
+				cbAuxTypeOfBet.setVisible(true);				
+			}
+			else if(betSelected.equals("RedBlack")){
+				String cbAuxRedBlackArray={""
+			}
+			
+		
+	}
+
+	private JComboBox getCbAuxTypeOfBet() {
+		if (cbAuxTypeOfBet == null) {
+			String[]cbAuxColumns={"Column 0","Column 1","Column 2"};
+			cbAuxTypeOfBet = new JComboBox(cbAuxColumns);
+			cbAuxTypeOfBet.setVisible(false);
+			cbAuxTypeOfBet.setBounds(167, 200, 114, 20);
 		}
-		return comboBox;
+		return cbAuxTypeOfBet;
 	}
 }
