@@ -4,8 +4,8 @@ import logic.Number;
 
 public class EvenOdd extends TypeOfBet {
 	
-	public static final int EVEN = 1;
-	public static final int ODD  = 2;
+	public static final int EVEN = 0;
+	public static final int ODD  = 1;
 
 	private int type;
 
