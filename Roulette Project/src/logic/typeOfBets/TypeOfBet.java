@@ -5,8 +5,7 @@ abstract public class TypeOfBet {
 	private double coeficient;
 	private int numbers;
 
-	//abstract public boolean isWinnerNumber(int box); it cant be here because we need differents parameters
-	
+	abstract public boolean isWinnerNumber(int box); 
 	/**
 	 * Calculate the gain resulting from the bet and adds the amount wagered
 	 * @param amountBeted 
