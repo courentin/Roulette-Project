@@ -5,7 +5,6 @@ import logic.Number;
 abstract public class TypeOfBet {
 	private String name;
 	protected double coeficient;
-	private int numbers;
 
 	public TypeOfBet() {
 		this.name = this.getClass().getName();
@@ -19,8 +18,9 @@ abstract public class TypeOfBet {
 	 */
 	public double calcEarnings(int amountBeted){
 		return coeficient*amountBeted;
-		
-		
 	}
 	
+	public String toString() {
+		return this.name;
+	}
 }
