@@ -20,10 +20,14 @@ public class Column extends TypeOfBet {
 
 
 
-	public boolean isWinerNumber(int box) {
+	public boolean isWinnerNumber(int box) {
 		if(columnBeted==1)return column1.contains(box);
 		else if(columnBeted==2)return column2.contains(box);
 		else if(columnBeted==3)return column3.contains(box);
 		else return false;	
 	}
+
+
+
+	
 }

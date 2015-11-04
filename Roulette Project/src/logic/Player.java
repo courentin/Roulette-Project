@@ -1,6 +1,7 @@
 package logic;
 
 import java.awt.Color;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 import logic.typeOfBets.TypeOfBet;
@@ -70,10 +71,17 @@ public class Player {
 		this.money -= money;
 	}
 	
-	public Bet bet(int amount, TypeOfBet typeOfBet) {
+	public Bet makeBet(int amount, TypeOfBet typeOfBet) {
+		if(amount>=money){
 		Bet bet = new Bet(amount, typeOfBet);
 		bets.add(bet);
+		money=money-amount;
 		return bet;
+		}
+		else{
+			throw new InvalidParameterException("You dont have money");
+		}
+		
 	}
 }
 
