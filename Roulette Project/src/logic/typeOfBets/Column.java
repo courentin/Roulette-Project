@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 
-public class Column extends TypeOfBet {
+public class Column extends TypeOfBet { 
 	private HashSet<Integer>column1;
 	private HashSet<Integer>column2;
 	private HashSet<Integer>column3;
