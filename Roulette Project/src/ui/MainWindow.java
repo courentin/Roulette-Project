@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import logic.Game;
-import logic.typeOfBets.TypeOfBet;
+import logic.typeOfBets.*;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -182,7 +182,8 @@ public class MainWindow extends JFrame {
 			cbTypeOfBet = new JComboBox<TypeOfBet>();
 			cbTypeOfBet.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String betSelected = String.valueOf(cbTypeOfBet.getSelectedItem());
+					TypeOfBet betSelected = (TypeOfBet) cbTypeOfBet.getSelectedItem();
+					//String betSelected = String.valueOf(cbTypeOfBet.getSelectedItem());
 					showBetOptions(betSelected);
 				}
 			});
@@ -191,33 +192,31 @@ public class MainWindow extends JFrame {
 		}
 		return cbTypeOfBet;
 	}
-	protected void showBetOptions(String betSelected) {		
+	protected void showBetOptions(TypeOfBet betSelected) {		
 			showCbAux(betSelected);			
 		
 	}
-	private void showCbAux(String betSelected) {
-			if(betSelected.equals("Column")){
+	private void showCbAux(TypeOfBet betSelected) {
+			if(betSelected instanceof Column){
 				String[]cbAuxColumnsArray={"Column 0","Column 1","Column 2"};
 				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxColumnsArray));
 				cbAuxTypeOfBet.setVisible(true);	
 			}
-			else if(betSelected.equals("CornerBet")){
+			else if(betSelected instanceof CornerBet){
 				//thinking about it
-				
 			}
-			else if(betSelected.equals("EvenOdd")){
+			else if(betSelected instanceof EvenOdd){
 				String[]cbAuxEvenOddArray={"Even","Odd"};
 				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxEvenOddArray));
 				cbAuxTypeOfBet.setVisible(true);				
 			}
-			else if(betSelected.equals("RedBlack")){
+			else if(betSelected instanceof RedBlack){
 				String[] cbAuxRedBlackArray={"Red","Black"};
 				cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxRedBlackArray));
 				cbAuxTypeOfBet.setVisible(true);
 			}
-			else if(betSelected.equals("StraighUp")){
+			else if(betSelected instanceof StraightUp){
 				cbAuxTypeOfBet.setVisible(false);
-				
 			}
 			
 		
