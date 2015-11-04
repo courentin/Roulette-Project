@@ -6,14 +6,14 @@ public class Column extends TypeOfBet {
 	private int columnBeted;
 
 	public Column(int columnBeted) {
-		super();
+		this();
 		this.columnBeted = columnBeted;
-		this.coeficient = 2;
+
 	}
 
 	public Column() {
-		// TODO Auto-generated constructor stub
-		this.name="Column1";
+		super();
+		this.coeficient = 2;
 	}
 
 	public boolean isWinnerNumber(Number box) {

@@ -7,7 +7,7 @@ abstract public class TypeOfBet {
 	protected double coeficient;
 
 	public TypeOfBet() {
-		this.name = this.getClass().getName();
+		this.name = this.getClass().getSimpleName();
 	}
 
 	abstract public boolean isWinnerNumber(Number box); 
