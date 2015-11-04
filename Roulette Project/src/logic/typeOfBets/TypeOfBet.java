@@ -2,7 +2,7 @@ package logic.typeOfBets;
 
 abstract public class TypeOfBet {
 	private String name;
-	private double coeficient;
+	protected double coeficient;
 	private int numbers;
 
 	abstract public boolean isWinnerNumber(int box); 
