@@ -11,6 +11,11 @@ public class Column extends TypeOfBet {
 		this.coeficient = 2;
 	}
 
+	public Column() {
+		// TODO Auto-generated constructor stub
+		this.name="Column1";
+	}
+
 	public boolean isWinnerNumber(Number box) {
 		return columnBeted == box.getColumn();
 	}	

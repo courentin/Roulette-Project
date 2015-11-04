@@ -3,7 +3,7 @@ package logic.typeOfBets;
 import logic.Number;
 
 abstract public class TypeOfBet {
-	private String name;
+	protected String name;
 	protected double coeficient;
 
 	public TypeOfBet() {

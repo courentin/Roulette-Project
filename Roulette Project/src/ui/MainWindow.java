@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import logic.Game;
+import logic.typeOfBets.TypeOfBet;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -178,14 +179,14 @@ public class MainWindow extends JFrame {
 	}
 	private JComboBox getCbTypeOfBet() {
 		if (cbTypeOfBet == null) {
-			cbTypeOfBet = new JComboBox<String>();
+			cbTypeOfBet = new JComboBox<TypeOfBet>();
 			cbTypeOfBet.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String betSelected = String.valueOf(cbTypeOfBet.getSelectedItem());
 					showBetOptions(betSelected);
 				}
 			});
-			cbTypeOfBet.setModel(new DefaultComboBoxModel<String>(game.getBetsAvailable()));
+			cbTypeOfBet.setModel(new DefaultComboBoxModel<TypeOfBet>(game.getBetsAvailable()));
 			cbTypeOfBet.setBounds(26, 200, 106, 20);
 		}
 		return cbTypeOfBet;

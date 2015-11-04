@@ -4,11 +4,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.typeOfBets.Column;
 import logic.typeOfBets.TypeOfBet;
 
 public class Game {
 	private Player player;
-	private String[] betsAvailable;
+	private TypeOfBet[] betsAvailable;
 	
 	
 	//ARRAY PLAYERS?
@@ -17,17 +18,17 @@ public class Game {
 
 	public Game(String playerName,Color color) {
 		player=new Player(playerName,color);
-		betsAvailable=new String[5];
+		betsAvailable=new TypeOfBet[5];
 		chargeBets();
 		
 	}
 
 	private void chargeBets() {
-		betsAvailable[0]=("Column");
-		betsAvailable[1]=("CornerBet");
-		betsAvailable[2]=("EvenOdd");
-		betsAvailable[3]=("RedBlack");
-		betsAvailable[4]=("StraightUp");		
+		betsAvailable[0]=new Column();
+//		betsAvailable[1]=("CornerBet");
+//		betsAvailable[2]=("EvenOdd");
+//		betsAvailable[3]=("RedBlack");
+//		betsAvailable[4]=("StraightUp");		
 	}
 
 	public Player getPlayer() {
@@ -38,11 +39,11 @@ public class Game {
 		this.player = player;
 	}
 
-	public String[] getBetsAvailable() {
+	public TypeOfBet[] getBetsAvailable() {
 		return betsAvailable;
 	}
 
-	public void setBetsAvailable(String[] betsAvailable) {
+	public void setBetsAvailable(TypeOfBet[] betsAvailable) {
 		this.betsAvailable = betsAvailable;
 	}
 	
