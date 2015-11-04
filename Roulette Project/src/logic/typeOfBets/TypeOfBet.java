@@ -23,4 +23,8 @@ abstract public class TypeOfBet {
 	public String toString() {
 		return this.name;
 	}
+	
+	abstract public String printInfo();
+		
+	
 }

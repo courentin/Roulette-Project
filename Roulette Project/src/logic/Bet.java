@@ -34,4 +34,10 @@ public class Bet {
 	public double getMoneyExpected() {
 		return amount + typeOfBet.calcEarnings(amount);
 	}
+
+	@Override
+	public String toString() {
+		return amount+"€-"+typeOfBet+"-"+typeOfBet.printInfo()+"-Expected to win:"+typeOfBet.calcEarnings(amount);
+	}
+	
 }

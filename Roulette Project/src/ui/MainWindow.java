@@ -46,7 +46,7 @@ public class MainWindow extends JFrame {
 	private JTextField tfMoney;
 	private JLabel lblPlayerName;
 	private Game game;
-	private JTextPane textPane;
+	private JTextPane txBets;
 	private JComboBox cbTypeOfBet;
 	private JComboBox cbAuxTypeOfBet;
 	private JTextField jtStraightUp;
@@ -87,7 +87,7 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(getTfMoney());
 		contentPane.add(getLblPlayerName());
-		contentPane.add(getTextPane());
+		contentPane.add(getTxBets());
 		contentPane.add(getCbTypeOfBet());
 		contentPane.add(getCbAuxTypeOfBet());
 		contentPane.add(getBtnBet());
@@ -186,12 +186,12 @@ public class MainWindow extends JFrame {
 		}
 		return lblPlayerName;
 	}
-	private JTextPane getTextPane() {
-		if (textPane == null) {
-			textPane = new JTextPane();
-			textPane.setBounds(431, 163, 199, 121);
+	private JTextPane getTxBets() {
+		if (txBets == null) {
+			txBets = new JTextPane();
+			txBets.setBounds(431, 163, 199, 121);
 		}
-		return textPane;
+		return txBets;
 	}
 	private JComboBox getCbTypeOfBet() {
 		if (cbTypeOfBet == null) {
@@ -299,6 +299,7 @@ public class MainWindow extends JFrame {
 
 					if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
 					representMoney();
+					txBets.setText(game.getPlayer().getBets().toString());
 					btnNoMoreBets.setEnabled(true);
 					
 				}

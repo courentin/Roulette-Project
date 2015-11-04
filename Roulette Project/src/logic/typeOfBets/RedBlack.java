@@ -23,4 +23,10 @@ public class RedBlack extends TypeOfBet {
 		else
 			return box.getColor() == Color.BLACK;
 	}
+
+	@Override
+	public String printInfo() {
+		
+		return color.toString();
+	}
 }

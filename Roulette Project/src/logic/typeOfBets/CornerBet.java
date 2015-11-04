@@ -19,4 +19,10 @@ public class CornerBet extends TypeOfBet {
 	public boolean isWinnerNumber(Number box) {
 		return betBoxes.contains(box.getValue());	
 	}
+
+	@Override
+	public String printInfo() {
+		
+		return betBoxes.toString();
+	}
 }

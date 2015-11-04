@@ -19,4 +19,10 @@ public class StraightUp extends TypeOfBet {
 	public boolean isWinnerNumber(Number box) {
 		return box.getValue() == number;
 	}
+
+	@Override
+	public String printInfo() {
+		
+		return String.valueOf(number);
+	}
 }

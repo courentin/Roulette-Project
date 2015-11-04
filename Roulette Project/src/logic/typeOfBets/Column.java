@@ -19,6 +19,12 @@ public class Column extends TypeOfBet {
 		return columnBeted == box.getColumn();
 	}
 
+	@Override
+	public String printInfo() {
+		
+		return String.valueOf(columnBeted);
+	}
+
 	
 	
 }

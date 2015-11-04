@@ -28,4 +28,11 @@ public class EvenOdd extends TypeOfBet {
 		else
 			return value%2 != 0;
 	}
+
+	@Override
+	public String printInfo() {
+		if(type==0)return "even";
+		else if(type==1) return "odd";		
+		return null;
+	}
 }
