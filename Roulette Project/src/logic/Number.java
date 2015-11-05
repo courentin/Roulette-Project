@@ -12,8 +12,8 @@ public class Number {
 	}
 	
 	public Number() {
-		//this.value = (int) (Math.random()*37);
-		this(0);
+		this.value = (int) (Math.random()*37);
+		
 	}
 
 	public Color getColor() {
