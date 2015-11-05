@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
+
+import logic.typeOfBets.StraightUp;
 import logic.typeOfBets.TypeOfBet;
 
 public class Player {
@@ -98,7 +100,7 @@ public class Player {
 	public void executeBets(Number number) {
 
 		for(Bet bet : bets) {
-			if(number.getValue() == 0 && bet.getAmount() >= 10) {
+			if(!(bet.getTypeOfBet() instanceof StraightUp) && number.getValue() == 0 && bet.getAmount() >= 10) {
 				money += bet.getAmount()/2;
 			} else if(bet.getTypeOfBet().isWinnerNumber(number)) {
 				money += bet.getMoneyExpected();
