@@ -7,9 +7,12 @@ import java.util.List;
 
 import logic.typeOfBets.Column;
 import logic.typeOfBets.CornerBet;
+import logic.typeOfBets.Dozen;
 import logic.typeOfBets.EvenOdd;
+import logic.typeOfBets.FailedPassed;
 import logic.typeOfBets.RedBlack;
 import logic.typeOfBets.StraightUp;
+import logic.typeOfBets.TwoDozen;
 import logic.typeOfBets.TypeOfBet;
 
 public class Game {
@@ -23,7 +26,7 @@ public class Game {
 
 	public Game(String playerName,Color color) {
 		player=new Player(playerName,color);
-		betsAvailable=new TypeOfBet[5];
+		betsAvailable=new TypeOfBet[8];
 		history = new ArrayList<>();
 		chargeBets();
 		
@@ -110,9 +113,13 @@ public class Game {
 	private void chargeBets() {
 		betsAvailable[0]=new Column();
 		betsAvailable[1]=new CornerBet();
-		betsAvailable[2]=new EvenOdd();
-		betsAvailable[3]=new RedBlack();
-		betsAvailable[4]=new StraightUp();		
+		betsAvailable[2]=new Dozen();
+		betsAvailable[3]=new EvenOdd();
+		betsAvailable[4]=new FailedPassed();
+		betsAvailable[5]=new RedBlack();
+		betsAvailable[6]=new StraightUp();
+		betsAvailable[7]=new TwoDozen();
+		
 	}
 
 	public Player getPlayer() {
