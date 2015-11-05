@@ -5,7 +5,6 @@ import logic.typeOfBets.TypeOfBet;
 public class Bet {
 	private int amount;
 	private TypeOfBet typeOfBet;
-	private boolean isWinner;
 
 	public Bet(int amount, TypeOfBet typeOfBet) {
 		super();
@@ -25,19 +24,14 @@ public class Bet {
 	public void setTypeOfBet(TypeOfBet typeOfBet) {
 		this.typeOfBet = typeOfBet;
 	}
-	public boolean isWinner() {
-		return isWinner;
-	}
-	public void setWinner(boolean isWinner) {
-		this.isWinner = isWinner;
-	}
+
 	public double getMoneyExpected() {
 		return amount + typeOfBet.calcEarnings(amount);
 	}
 
 	@Override
 	public String toString() {
-		return amount+"€-"+typeOfBet+"-"+typeOfBet.printInfo()+"-Expected to win:"+typeOfBet.calcEarnings(amount);
+		return amount+"ï¿½-"+typeOfBet+"-"+typeOfBet.printInfo()+"-Expected to win:"+typeOfBet.calcEarnings(amount);
 	}
 	
 }
