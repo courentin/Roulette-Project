@@ -32,6 +32,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
 
 public class MainWindow extends JFrame {
 
@@ -57,6 +59,7 @@ public class MainWindow extends JFrame {
 	private JTextField tfNumber;
 	private JTextPane txEvenOdd;
 	private JTextPane txRedBlack;
+	private JTable tbBets;
 
 
 	/**
@@ -98,6 +101,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(getTfNumber());
 		contentPane.add(getTxEvenOdd());
 		contentPane.add(getTxRedBlack());
+		contentPane.add(getTbBets());
 
 		representStatus();
 	}
@@ -366,5 +370,18 @@ public class MainWindow extends JFrame {
 			txRedBlack.setBounds(537, 251, 86, 48);
 		}
 		return txRedBlack;
+	}
+	private JTable getTbBets() {
+		if (tbBets == null) {
+			String[] columnNames = {"Bet value","Type of bet","Expected to win"};
+
+			tbBets = new JTable(null,columnNames);
+			tbBets.setBorder(new LineBorder(new Color(0, 0, 0)));
+			
+			
+			
+			tbBets.setBounds(63, 121, 136, -80);
+		}
+		return tbBets;
 	}
 }
