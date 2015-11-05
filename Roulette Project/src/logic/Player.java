@@ -61,6 +61,7 @@ public class Player {
 			Object[] data = { bet.getAmount(), bet, bet.getMoneyExpected() };
 			tableModel.addRow(data);
 		}
+		
 
 		return tableModel;
 	}

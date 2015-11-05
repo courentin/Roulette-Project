@@ -24,6 +24,7 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -34,6 +35,12 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import java.awt.Dimension;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Rectangle;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainWindow extends JFrame {
 
@@ -48,7 +55,6 @@ public class MainWindow extends JFrame {
 	private JTextField tfMoney;
 	private JLabel lblPlayerName;
 	private Game game;
-	private JTextPane txBets;
 	private JComboBox cbTypeOfBet;
 	private JComboBox cbAuxTypeOfBet;
 	private JTextField jtStraightUp;
@@ -59,7 +65,9 @@ public class MainWindow extends JFrame {
 	private JTextField tfNumber;
 	private JTextPane txEvenOdd;
 	private JTextPane txRedBlack;
+	private JScrollPane scrollPane;
 	private JTable tbBets;
+	//private JScrollPane scrollPane;
 
 
 	/**
@@ -82,28 +90,99 @@ public class MainWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MainWindow() {
+		
 		game=new Game("DefaultPlayer", Color.BLUE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 676, 437);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		contentPane.add(getTfMoney());
-		contentPane.add(getLblPlayerName());
-		contentPane.add(getTxBets());
-		contentPane.add(getCbTypeOfBet());
-		contentPane.add(getCbAuxTypeOfBet());
-		contentPane.add(getBtnBet());
-		contentPane.add(getSpAmount());
-		contentPane.add(getBtnNoMoreBets());
-		contentPane.add(getTfNumber());
-		contentPane.add(getTxEvenOdd());
-		contentPane.add(getTxRedBlack());
-		contentPane.add(getTbBets());
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(21)
+					.addComponent(getCbTypeOfBet(), GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+					.addGap(35)
+					.addComponent(getCbAuxTypeOfBet(), GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+					.addGap(342))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(58)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(55)
+							.addComponent(getSpAmount(), GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+						.addComponent(getBtnBet(), GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+					.addGap(21)
+					.addComponent(getBtnNoMoreBets(), GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+					.addGap(93)
+					.addComponent(getTxEvenOdd(), GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+					.addGap(27)
+					.addComponent(getTxRedBlack(), GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(275)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(286)
+							.addComponent(getLblPlayerName(), GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(124)
+							.addComponent(getTfNumber(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(71)
+							.addComponent(getTfMoney(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(360, Short.MAX_VALUE)
+					.addComponent(getScrollPane(), GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(7)
+					.addComponent(getLblPlayerName())
+					.addGap(11)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(getTfNumber(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(getTfMoney(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(88)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(107)
+									.addComponent(getCbTypeOfBet(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(107)
+									.addComponent(getCbAuxTypeOfBet(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(55)
+							.addComponent(getScrollPane(), GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(13)
+							.addComponent(getSpAmount(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(7)
+							.addComponent(getBtnBet()))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(40)
+							.addComponent(getBtnNoMoreBets()))
+						.addComponent(getTxEvenOdd(), GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+						.addComponent(getTxRedBlack(), GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)))
+		);
+		contentPane.setLayout(gl_contentPane);
+		//contentPane.add(getTbBet);
+		//contentPane.add(getTbBets());
 
 		representStatus();
+	}
+
+	private void newGame() {
+		game=new Game("DefaultPlayer", Color.BLUE);
+		representStatus();
+		
 	}
 
 	private void representStatus() {
@@ -111,8 +190,14 @@ public class MainWindow extends JFrame {
 		if(this.game.getPlayer().getMoney()<=0){
 			JOptionPane.showMessageDialog(null,"Game Over");
 		}
+		representBets();
 
 
+	}
+
+	private void representBets() {
+		System.err.println(game.getPlayer().getBetsTable().getRowCount());
+		tbBets.setModel(game.getPlayer().getBetsTable());
 	}
 
 	private void representMoney() {
@@ -121,9 +206,7 @@ public class MainWindow extends JFrame {
 
 	}
 
-	private void playGame(){
-
-	}
+	
 
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
@@ -146,6 +229,15 @@ public class MainWindow extends JFrame {
 	private JMenuItem getMntmNewGame() {
 		if (mntmNewGame == null) {
 			mntmNewGame = new JMenuItem("New Game");
+			mntmNewGame.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					newGame();
+					
+					
+					
+					
+				}
+			});
 		}
 		return mntmNewGame;
 	}
@@ -180,7 +272,6 @@ public class MainWindow extends JFrame {
 			tfMoney = new JTextField();
 			tfMoney.setEditable(false);
 			tfMoney.setHorizontalAlignment(SwingConstants.CENTER);
-			tfMoney.setBounds(561, 37, 86, 20);
 			tfMoney.setColumns(10);
 		}
 		return tfMoney;
@@ -190,16 +281,8 @@ public class MainWindow extends JFrame {
 			lblPlayerName = new JLabel(game.getPlayer().getName());
 			lblPlayerName.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPlayerName.setForeground(game.getPlayer().getColor());
-			lblPlayerName.setBounds(566, 12, 81, 14);
 		}
 		return lblPlayerName;
-	}
-	private JTextPane getTxBets() {
-		if (txBets == null) {
-			txBets = new JTextPane();
-			txBets.setBounds(424, 93, 199, 121);
-		}
-		return txBets;
 	}
 	private JComboBox getCbTypeOfBet() {
 		if (cbTypeOfBet == null) {
@@ -212,7 +295,6 @@ public class MainWindow extends JFrame {
 				}
 			});
 			cbTypeOfBet.setModel(new DefaultComboBoxModel<TypeOfBet>(game.getBetsAvailable()));
-			cbTypeOfBet.setBounds(26, 200, 106, 20);
 		}
 		return cbTypeOfBet;
 	}
@@ -251,7 +333,6 @@ public class MainWindow extends JFrame {
 			String[]cbAuxColumns={"Column 0","Column 1","Column 2"};
 			cbAuxTypeOfBet = new JComboBox(cbAuxColumns);
 			cbAuxTypeOfBet.setVisible(false);
-			cbAuxTypeOfBet.setBounds(167, 200, 114, 20);
 		}
 		return cbAuxTypeOfBet;
 	}
@@ -307,12 +388,11 @@ public class MainWindow extends JFrame {
 
 					if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
 					representMoney();
-					txBets.setText(game.getPlayer().getBets().toString());
+					representBets();
 					btnNoMoreBets.setEnabled(true);
 					
 				}
 			});
-			btnBet.setBounds(63, 291, 89, 23);
 		}
 		return btnBet;
 	}
@@ -320,7 +400,6 @@ public class MainWindow extends JFrame {
 		if (spAmount == null) {
 			spAmount = new JSpinner();
 			spAmount.setModel(new SpinnerListModel(new String[] {"5", "10", "50", "100", "500", "1000"}));
-			spAmount.setBounds(118, 264, 69, 20);
 		}
 		return spAmount;
 	}
@@ -344,7 +423,6 @@ public class MainWindow extends JFrame {
 					
 				}
 			});
-			btnNoMoreBets.setBounds(208, 291, 123, 23);
 		}
 		return btnNoMoreBets;
 	}
@@ -352,7 +430,6 @@ public class MainWindow extends JFrame {
 		if (tfNumber == null) {
 			tfNumber = new JTextField();
 			tfNumber.setEditable(false);
-			tfNumber.setBounds(404, 37, 86, 20);
 			tfNumber.setColumns(10);
 		}
 		return tfNumber;
@@ -360,27 +437,25 @@ public class MainWindow extends JFrame {
 	private JTextPane getTxEvenOdd() {
 		if (txEvenOdd == null) {
 			txEvenOdd = new JTextPane();
-			txEvenOdd.setBounds(424, 251, 86, 48);
 		}
 		return txEvenOdd;
 	}
 	private JTextPane getTxRedBlack() {
 		if (txRedBlack == null) {
 			txRedBlack = new JTextPane();
-			txRedBlack.setBounds(537, 251, 86, 48);
 		}
 		return txRedBlack;
 	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setViewportView(getTbBets());
+		}
+		return scrollPane;
+	}
 	private JTable getTbBets() {
 		if (tbBets == null) {
-			String[] columnNames = {"Bet value","Type of bet","Expected to win"};
-
-			tbBets = new JTable(null,columnNames);
-			tbBets.setBorder(new LineBorder(new Color(0, 0, 0)));
-			
-			
-			
-			tbBets.setBounds(63, 121, 136, -80);
+			tbBets = new JTable(game.getPlayer().getBetsTable());
 		}
 		return tbBets;
 	}
