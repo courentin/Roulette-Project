@@ -1,13 +1,9 @@
 package logic;
 
 import java.awt.Color;
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import logic.typeOfBets.TypeOfBet;
 
 public class Player {
@@ -100,8 +96,11 @@ public class Player {
 
 	} 
 	public void executeBets(Number number) {
+
 		for(Bet bet : bets) {
-			if(bet.getTypeOfBet().isWinnerNumber(number)) {
+			if(number.getValue() == 0 && bet.getAmount() >= 10) {
+				money += bet.getAmount()/2;
+			} else if(bet.getTypeOfBet().isWinnerNumber(number)) {
 				money += bet.getMoneyExpected();
 			}
 		}
