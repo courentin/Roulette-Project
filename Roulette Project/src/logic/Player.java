@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 import logic.typeOfBets.TypeOfBet;
 
 public class Player {
@@ -47,7 +51,19 @@ public class Player {
 	public ArrayList<Bet> getBets() {
 		return bets;
 	}
+	
+	
+	public DefaultTableModel getBetsTable() {
+		String[] columnNames = {"Bet value","Type of bet","Expected to win"};
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		
+		for(Bet bet : bets) {
+			Object[] data = { bet.getAmount(), bet, bet.getMoneyExpected() };
+			tableModel.addRow(data);
+		}
 
+		return tableModel;
+	}
 
 	public void setBets(ArrayList<Bet> bets) {
 		this.bets = bets;
