@@ -44,6 +44,7 @@ public class Game {
 		
 		for(int i=0; i<37; i++) {
 			numbers[i][0] = i;
+			numbers[i][1] = 0;
 			for(Number number : history) {
 				if(number.getValue() == i) numbers[i][1]++;
 			}
