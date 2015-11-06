@@ -47,6 +47,7 @@ import javax.swing.JTabbedPane;
 import java.awt.Font;
 import javax.swing.KeyStroke;
 import java.awt.event.InputEvent;
+import javax.swing.SpinnerNumberModel;
 
 public class MainWindow extends JFrame {
 
@@ -81,6 +82,18 @@ public class MainWindow extends JFrame {
 	private JLabel lblAmount;
 	private JProgressBar process;
 	private JProgressBar processEven;
+	private JLabel lblRedblack;
+	private JLabel lblEvenodd;
+	private JSpinner spCorner1;
+	private JSpinner spCorner2;
+	private JSpinner spCorner3;
+	private JSpinner spCorner4;
+	private JTextField tfHotNumbers;
+	private JTextField tfColdNumbers;
+	private JLabel lblHotNumbers;
+	private JLabel lbColdNumbers;
+	private JPanel panel_2;
+	private JLabel lblColor;
 	//private JScrollPane scrollPane;
 
 
@@ -108,22 +121,23 @@ public class MainWindow extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/img/icon175x175.png")));
 
-		game=new Game("DefaultPlayer", Color.BLUE);
+		game=new Game("DefaultPlayer", Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 795, 437);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 51, 153));
+		contentPane.setBackground(new Color(0, 0, 205));
+		//contentPane.setBackground();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.add(getLblPlayerName());
-		contentPane.add(getTfNumber());
 		contentPane.add(getScrollPane());
 		contentPane.add(getPanel());
 		contentPane.add(getPanel_1());
 		contentPane.add(getLblMoney());
 		contentPane.add(getLblNewLabel());
+		contentPane.add(getPanel_2());
 		//contentPane.add(getTbBet);
 		//contentPane.add(getTbBets());
 
@@ -132,12 +146,14 @@ public class MainWindow extends JFrame {
 
 	private void newGame() {
 		game=new Game("DefaultPlayer", Color.BLUE);
-		txEvenOdd.setText("");
-		txRedBlack.setText("");
+		process.setValue(50);
+		processEven.setValue(50);
 		tfNumber.setText("");
 		representStatus();
 		cbTypeOfBet.setSelectedIndex(0);
 		cbAuxTypeOfBet.setSelectedIndex(0);
+		tfColdNumbers.setText("");
+		tfHotNumbers.setText("");
 
 	}
 
@@ -188,10 +204,6 @@ public class MainWindow extends JFrame {
 			mntmNewGame.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					newGame();
-
-
-
-
 				}
 			});
 		}
@@ -252,7 +264,7 @@ public class MainWindow extends JFrame {
 	private JComboBox getCbTypeOfBet() {
 		if (cbTypeOfBet == null) {
 			cbTypeOfBet = new JComboBox<TypeOfBet>();
-			cbTypeOfBet.setBounds(114, 12, 87, 20);
+			cbTypeOfBet.setBounds(114, 15, 141, 20);
 			cbTypeOfBet.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					TypeOfBet betSelected = (TypeOfBet) cbTypeOfBet.getSelectedItem();
@@ -272,23 +284,41 @@ public class MainWindow extends JFrame {
 		if(betSelected instanceof Column){
 			String[]cbAuxColumnsArray={"Column 0","Column 1","Column 2"};
 			cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxColumnsArray));
+			spCornerBetOff();
 			cbAuxTypeOfBet.setVisible(true);	
 		}
 		else if(betSelected instanceof CornerBet){
-			//thinking about it
+			cbAuxTypeOfBet.setVisible(false);
+			
+			spCorner1.setEnabled(true);
+			spCorner2.setEnabled(true);
+			spCorner3.setEnabled(true);
+			spCorner4.setEnabled(true);
+			spCorner1.setVisible(true);
+			spCorner2.setVisible(true);
+			spCorner3.setVisible(true);
+			spCorner4.setVisible(true);
+
+
+			
+
+
 		}
 		else if(betSelected instanceof EvenOdd){
 			String[]cbAuxEvenOddArray={"Even","Odd"};
 			cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxEvenOddArray));
+			spCornerBetOff();
 			cbAuxTypeOfBet.setVisible(true);				
 		}
 		else if(betSelected instanceof RedBlack){
 			String[] cbAuxRedBlackArray={"Red","Black"};
 			cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxRedBlackArray));
+			spCornerBetOff();
 			cbAuxTypeOfBet.setVisible(true);
 		}
 		else if(betSelected instanceof StraightUp){
 			String[]cbAuxStraightUpArray=new String[37];
+			spCornerBetOff();
 			for(int i=0;i<=36;i++){
 				cbAuxStraightUpArray[i]=String.valueOf(i);
 			}
@@ -298,14 +328,19 @@ public class MainWindow extends JFrame {
 		else if(betSelected instanceof FailedPassed){
 			String[]cbAuxFailedPassedArray={"Failed (1-18)","Passed (19-36)"};
 			cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxFailedPassedArray));
+			spCornerBetOff();
 			cbAuxTypeOfBet.setVisible(true);
 		}
 		else if(betSelected instanceof TwoDozen){
+			spCornerBetOff();
 			String[]cbAuxTwoDozenArray={"}"};///PENSAR COMO ELEGIR 2 COLUMNAS
 		}
 
 		else if(betSelected instanceof Dozen){
-			//thinkaboutir
+			spCornerBetOff();
+			String[]cbAuxDozenArray={"0","1","3"};
+			cbAuxTypeOfBet.setModel(new DefaultComboBoxModel<String>(cbAuxDozenArray));
+			cbAuxTypeOfBet.setVisible(true);
 
 		}
 
@@ -313,11 +348,23 @@ public class MainWindow extends JFrame {
 
 	}
 
+	private void spCornerBetOff() {
+		spCorner1.setEnabled(false);
+		spCorner2.setEnabled(false);
+		spCorner3.setEnabled(false);
+		spCorner4.setEnabled(false);
+		spCorner1.setVisible(false);
+		spCorner2.setVisible(false);
+		spCorner3.setVisible(false);
+		spCorner4.setVisible(false);
+		
+	}
+
 	private JComboBox getCbAuxTypeOfBet() {
 		if (cbAuxTypeOfBet == null) {
 			String[]cbAuxColumns={"Column 0","Column 1","Column 2"};
 			cbAuxTypeOfBet = new JComboBox(cbAuxColumns);
-			cbAuxTypeOfBet.setBounds(114, 54, 87, 20);
+			cbAuxTypeOfBet.setBounds(114, 56, 141, 20);
 			cbAuxTypeOfBet.setVisible(true);
 		}
 		return cbAuxTypeOfBet;
@@ -356,7 +403,12 @@ public class MainWindow extends JFrame {
 
 					}
 					else if (betSelected instanceof CornerBet){
-
+						try{
+							((CornerBet)betSelected).setBetBoxes((int) spCorner1.getValue(),(int) spCorner2.getValue(),(int)spCorner3.getValue(),(int)spCorner4.getValue());
+						}catch(Exception ex){
+							JOptionPane.showMessageDialog(contentPane, ex.getMessage());
+							
+						}
 					}
 					else if(betSelected instanceof EvenOdd){
 						((EvenOdd)betSelected).setType(cbAuxTypeOfBet.getSelectedIndex());
@@ -375,7 +427,10 @@ public class MainWindow extends JFrame {
 
 					}
 					else if(betSelected instanceof FailedPassed){
-						System.err.println("ERR");
+						((FailedPassed)betSelected).setType((String) cbAuxTypeOfBet.getSelectedItem());
+					}
+					else if(betSelected instanceof Dozen){
+						((Dozen)betSelected).setDozen(cbAuxTypeOfBet.getSelectedIndex());
 					}
 
 					if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
@@ -391,7 +446,7 @@ public class MainWindow extends JFrame {
 	private JSpinner getSpAmount() {
 		if (spAmount == null) {
 			spAmount = new JSpinner();
-			spAmount.setBounds(114, 100, 87, 20);
+			spAmount.setBounds(114, 100, 141, 20);
 			spAmount.setModel(new SpinnerListModel(new String[] {"5", "10", "50", "100", "500", "1000"}));
 		}
 		return spAmount;
@@ -401,7 +456,7 @@ public class MainWindow extends JFrame {
 		if (btnNoMoreBets == null) {
 			btnNoMoreBets = new JButton("No more bets!");
 			btnNoMoreBets.setMnemonic(KeyEvent.VK_N);
-			btnNoMoreBets.setBounds(132, 131, 123, 23);
+			btnNoMoreBets.setBounds(148, 131, 107, 23);
 			btnNoMoreBets.setEnabled(false);
 			btnNoMoreBets.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -413,10 +468,17 @@ public class MainWindow extends JFrame {
 
 					btnNoMoreBets.setEnabled(false);
 					representMoney();
-					//txRedBlack.setText(game.getRedBlackStatistics().toString());
-					//txEvenOdd.setText(game.getEvenOddStatistics().toString());
+					tfHotNumbers.setText(String.valueOf(game.getHotColdNumbers().subList(0, 3)));
+					tfColdNumbers.setText(String.valueOf(game.getHotColdNumbers().subList(4, 7)));
 					process.setValue((int) Math.round(game.getRedBlackStatistics().get(0)*100));
 					processEven.setValue((int) Math.round(game.getEvenOddStatistics().get(0)*100));
+					
+					if(number.getColor().equals(Color.RED)){
+						lblColor.setText("The Color is Red");
+					}
+					else if(number.getColor().equals(Color.BLACK)){
+						lblColor.setText("The Color is Black");
+					}
 				}
 			});
 		}
@@ -425,10 +487,10 @@ public class MainWindow extends JFrame {
 	private JTextField getTfNumber() {
 		if (tfNumber == null) {
 			tfNumber = new JTextField();
+			tfNumber.setBounds(10, 5, 220, 62);
 			tfNumber.setHorizontalAlignment(SwingConstants.CENTER);
 			tfNumber.setFont(new Font("Tahoma", Font.BOLD, 30));
 			tfNumber.setBackground(new Color(153, 204, 255));
-			tfNumber.setBounds(93, 49, 125, 71);
 			tfNumber.setEditable(false);
 			tfNumber.setColumns(10);
 		}
@@ -468,16 +530,20 @@ public class MainWindow extends JFrame {
 		if (panel == null) {
 			panel = new JPanel();
 			panel.setBackground(new Color(102, 153, 204));
-			panel.setBounds(10, 200, 265, 165);
+			panel.setBounds(10, 200, 285, 165);
 			panel.setLayout(null);
 			panel.add(getCbTypeOfBet());
 			panel.add(getBtnBet());
 			panel.add(getBtnNoMoreBets());
 			panel.add(getSpAmount());
-			panel.add(getCbAuxTypeOfBet());
 			panel.add(getLblTypeOfBet());
 			panel.add(getLblOption());
 			panel.add(getLblAmount());
+			panel.add(getCbAuxTypeOfBet());
+			panel.add(getSpCorner1());
+			panel.add(getSpCorner2());
+			panel.add(getSpCorner3());
+			panel.add(getSpCorner4());
 		}
 		return panel;
 	}
@@ -487,7 +553,7 @@ public class MainWindow extends JFrame {
 			process.setValue(50);
 			process.setForeground(Color.RED);
 			process.setBackground(Color.BLACK);
-			process.setBounds(20, 20, 150, 30);
+			process.setBounds(21, 34, 150, 30);
 			process.setStringPainted(true);
 		}
 		return process;
@@ -498,7 +564,7 @@ public class MainWindow extends JFrame {
 			processEven.setValue(50);
 			processEven.setForeground(Color.ORANGE);
 			processEven.setBackground(Color.CYAN);
-			processEven.setBounds(210, 20, 150, 30);
+			processEven.setBounds(215, 34, 150, 30);
 			processEven.setStringPainted(true);
 		}
 		return processEven;
@@ -511,12 +577,19 @@ public class MainWindow extends JFrame {
 			//panel_1.add(getTxRedBlack());
 			panel_1.add(getEvenOddProcess());
 			panel_1.add(getRedBlackProcess());
+			panel_1.add(getLblRedblack());
+			panel_1.add(getLblEvenodd());
+			panel_1.add(getTfHotNumbers());
+			panel_1.add(getTfColdNumbers());
+			panel_1.add(getLblHotNumbers());
+			panel_1.add(getLbColdNumbers());
 		}
 		return panel_1;
 	}
 	private JLabel getLblMoney() {
 		if (lblMoney == null) {
 			lblMoney = new JLabel("");
+			lblMoney.setForeground(Color.WHITE);
 			lblMoney.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblMoney.setIcon(new ImageIcon(MainWindow.class.getResource("/img/image-2015-11-06 (1).png")));
 			lblMoney.setBounds(349, 25, 120, 33);
@@ -563,5 +636,113 @@ public class MainWindow extends JFrame {
 			lblAmount.setBounds(10, 103, 78, 14);
 		}
 		return lblAmount;
+	}
+	private JLabel getLblRedblack() {
+		if (lblRedblack == null) {
+			lblRedblack = new JLabel("Red/Black");
+			lblRedblack.setHorizontalAlignment(SwingConstants.CENTER);
+			lblRedblack.setBounds(21, 9, 150, 14);
+		}
+		return lblRedblack;
+	}
+	private JLabel getLblEvenodd() {
+		if (lblEvenodd == null) {
+			lblEvenodd = new JLabel("Even/Odd");
+			lblEvenodd.setHorizontalAlignment(SwingConstants.CENTER);
+			lblEvenodd.setBounds(215, 9, 150, 14);
+		}
+		return lblEvenodd;
+	}
+	private JSpinner getSpCorner1() {
+		if (spCorner1 == null) {
+			spCorner1 = new JSpinner();
+			spCorner1.setModel(new SpinnerNumberModel(1, 1, 36, 1));
+			spCorner1.setEnabled(false);
+			spCorner1.setVisible(false);
+			spCorner1.setBounds(114, 56, 29, 20);
+		}
+		return spCorner1;
+	}
+	private JSpinner getSpCorner2() {
+		if (spCorner2 == null) {
+			spCorner2 = new JSpinner();
+			spCorner2.setModel(new SpinnerNumberModel(1, 1, 36, 1));
+			spCorner2.setVisible(false);
+			spCorner2.setEnabled(false);
+			spCorner2.setBounds(148, 56, 29, 20);
+		}
+		return spCorner2;
+	}
+	private JSpinner getSpCorner3() {
+		if (spCorner3 == null) {
+			spCorner3 = new JSpinner();
+			spCorner3.setModel(new SpinnerNumberModel(1, 1, 36, 1));
+			spCorner3.setEnabled(false);
+			spCorner3.setVisible(false);
+			spCorner3.setBounds(187, 56, 29, 20);
+		}
+		return spCorner3;
+	}
+	private JSpinner getSpCorner4() {
+		if (spCorner4 == null) {
+			spCorner4 = new JSpinner();
+			spCorner4.setModel(new SpinnerNumberModel(1, 1, 36, 1));
+			spCorner4.setVisible(false);
+			spCorner4.setEnabled(false);
+			spCorner4.setBounds(226, 56, 29, 20);
+		}
+		return spCorner4;
+	}
+	private JTextField getTfHotNumbers() {
+		if (tfHotNumbers == null) {
+			tfHotNumbers = new JTextField();
+			tfHotNumbers.setBounds(21, 105, 150, 20);
+			tfHotNumbers.setColumns(10);
+		}
+		return tfHotNumbers;
+	}
+	private JTextField getTfColdNumbers() {
+		if (tfColdNumbers == null) {
+			tfColdNumbers = new JTextField();
+			tfColdNumbers.setColumns(10);
+			tfColdNumbers.setBounds(215, 105, 150, 20);
+		}
+		return tfColdNumbers;
+	}
+	private JLabel getLblHotNumbers() {
+		if (lblHotNumbers == null) {
+			lblHotNumbers = new JLabel("Hot numbers");
+			lblHotNumbers.setHorizontalAlignment(SwingConstants.CENTER);
+			lblHotNumbers.setBounds(21, 80, 150, 14);
+		}
+		return lblHotNumbers;
+	}
+	private JLabel getLbColdNumbers() {
+		if (lbColdNumbers == null) {
+			lbColdNumbers = new JLabel("Cold numbers");
+			lbColdNumbers.setHorizontalAlignment(SwingConstants.CENTER);
+			lbColdNumbers.setBounds(215, 80, 150, 14);
+		}
+		return lbColdNumbers;
+	}
+	private JPanel getPanel_2() {
+		if (panel_2 == null) {
+			panel_2 = new JPanel();
+			panel_2.setBackground(contentPane.getBackground());
+			panel_2.setBounds(40, 49, 240, 108);
+			panel_2.setLayout(null);
+			panel_2.add(getTfNumber());
+			panel_2.add(getLblColor());
+		}
+		return panel_2;
+	}
+	private JLabel getLblColor() {
+		if (lblColor == null) {
+			lblColor = new JLabel("");
+			lblColor.setHorizontalAlignment(SwingConstants.CENTER);
+			lblColor.setForeground(new Color(255, 255, 255));
+			lblColor.setBounds(10, 83, 220, 14);
+		}
+		return lblColor;
 	}
 }
