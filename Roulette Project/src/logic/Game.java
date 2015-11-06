@@ -52,15 +52,25 @@ public class Game {
 		
 		Arrays.sort(numbers, new java.util.Comparator<Integer[]>() {
 		    public int compare(Integer[] a, Integer[] b) {
-		        return Integer.compare(a[0], b[0]);
+		        return Integer.compare(b[1], a[1]);
 		    }
 		});
-		List<Integer> hotCold = new ArrayList<>();
-		
-		for(int j=0; j<4; j++) {
-			hotCold.set(j, numbers[j][0]);
-			hotCold.set(7-j, numbers[36-j][0]);
+
+		for(int k=0; k<37; k++) {
+			System.out.println(numbers[k][0]+" -> "+numbers[k][1]);
 		}
+		
+		List<Integer> hotCold = new ArrayList<>(8);
+		
+		hotCold.add(numbers[0][0]);
+		hotCold.add(numbers[1][0]);
+		hotCold.add(numbers[2][0]);
+		hotCold.add(numbers[3][0]);
+		
+		hotCold.add(numbers[33][0]);
+		hotCold.add(numbers[34][0]);
+		hotCold.add(numbers[35][0]);
+		hotCold.add(numbers[36][0]);
 		
 		return hotCold;
 	}
