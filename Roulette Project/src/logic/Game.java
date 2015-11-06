@@ -55,10 +55,6 @@ public class Game {
 		        return Integer.compare(b[1], a[1]);
 		    }
 		});
-
-		for(int k=0; k<37; k++) {
-			System.out.println(numbers[k][0]+" -> "+numbers[k][1]);
-		}
 		
 		List<Integer> hotCold = new ArrayList<>(8);
 		
