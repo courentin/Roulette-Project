@@ -56,7 +56,7 @@ public class Player {
 		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 		
 		for(Bet bet : bets) {
-			Object[] data = { bet.getAmount(), bet, bet.getMoneyExpected() };
+			Object[] data = { bet.getAmount(), bet.getTypeOfBet().printInfo(), bet.getMoneyExpected()-bet.getAmount() };
 			tableModel.addRow(data);
 		}
 		

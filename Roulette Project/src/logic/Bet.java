@@ -31,7 +31,7 @@ public class Bet {
 
 	@Override
 	public String toString() {
-		return amount+"\u20ac "+typeOfBet+"-"+typeOfBet.printInfo()+"-Expected to win:"+typeOfBet.calcEarnings(amount)+"\n";
+		return amount+"\u20ac "+typeOfBet+"-"+typeOfBet.printInfo()+"-Expected to win:"+typeOfBet.calcEarnings(amount);
 	}
 	
 }
