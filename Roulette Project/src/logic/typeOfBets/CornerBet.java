@@ -15,7 +15,7 @@ public class CornerBet extends TypeOfBet {
 		this.coeficient = 8;
 	}
 	
-	public void setBetBoxes(int one, int two, int three, int four) {
+	public void setBetBoxes(int one, int two, int three, int four) throws IllegalArgumentException {
 		List<Integer> numbers = new ArrayList<>();
 		numbers.add(one);
 		numbers.add(two);
