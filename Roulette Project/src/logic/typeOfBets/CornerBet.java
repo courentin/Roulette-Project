@@ -30,17 +30,17 @@ public class CornerBet extends TypeOfBet {
 		if(numbers.get(0)+1 == numbers.get(1) && numbers.get(1)+2 == numbers.get(2) && numbers.get(2)+1 == numbers.get(3)) {
 			this.numbers = numbers;
 		} else {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Theses values are incorrect");
 		}
 	}
 
 	@Override
 	public boolean isWinnerNumber(Number box) {
-		return numbers.contains(box.getValue());	
+		return numbers.contains(box.getValue());
 	}
 
 	@Override
 	public String printInfo() {
-		return numbers.toString();
+		return numbers.get(0) + " - " + numbers.get(1) + " - " + numbers.get(2) + " - " + numbers.get(3);
 	}
 }
