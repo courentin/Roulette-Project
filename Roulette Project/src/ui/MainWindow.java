@@ -168,7 +168,6 @@ public class MainWindow extends JFrame {
 	}
 
 	private void representBets() {
-		System.err.println(game.getPlayer().getBetsTable().getRowCount());
 		tbBets.setModel(game.getPlayer().getBetsTable());
 	}
 
@@ -393,18 +392,21 @@ public class MainWindow extends JFrame {
 		if (btnBet == null) {
 			btnBet = new JButton("Bet");
 			btnBet.setMnemonic(KeyEvent.VK_B);
-			btnBet.setBounds(33, 131, 89, 23);
+			btnBet.setBounds(20, 131, 89, 23);
 			btnBet.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					TypeOfBet betSelected = (TypeOfBet) cbTypeOfBet.getSelectedItem();
 					int amount = Integer.parseInt((String) spAmount.getValue());
 					if(betSelected instanceof Column){
 						((Column) betSelected).setColomnBeted(cbAuxTypeOfBet.getSelectedIndex());
+						if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
 
 					}
 					else if (betSelected instanceof CornerBet){
 						try{
 							((CornerBet)betSelected).setBetBoxes((int) spCorner1.getValue(),(int) spCorner2.getValue(),(int)spCorner3.getValue(),(int)spCorner4.getValue());
+							if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
+							representBets();
 						}catch(Exception ex){
 							JOptionPane.showMessageDialog(contentPane, ex.getMessage());
 							
@@ -412,28 +414,41 @@ public class MainWindow extends JFrame {
 					}
 					else if(betSelected instanceof EvenOdd){
 						((EvenOdd)betSelected).setType(cbAuxTypeOfBet.getSelectedIndex());
+						if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
+						representBets();
 					}
 					else if(betSelected instanceof RedBlack){
 						String color=(String) cbAuxTypeOfBet.getSelectedItem();
 						if(color.equals("Red")){
 							((RedBlack)betSelected).setColor(Color.RED);
+							representBets();
+							if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
+							representBets();
 						}
 						else if (color.equals("Black")){
 							((RedBlack)betSelected).setColor(Color.BLACK);
+							if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
+							representBets();
 						}
 					}
 					else if(betSelected instanceof StraightUp){
 						((StraightUp)betSelected).setNumber((int) Integer.parseInt((String) cbAuxTypeOfBet.getSelectedItem()));
+						if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
+						representBets();
 
 					}
 					else if(betSelected instanceof FailedPassed){
 						((FailedPassed)betSelected).setType((String) cbAuxTypeOfBet.getSelectedItem());
+						if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
+						representBets();
 					}
 					else if(betSelected instanceof Dozen){
 						((Dozen)betSelected).setDozen(cbAuxTypeOfBet.getSelectedIndex());
+						if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
+						representBets();
 					}
 
-					if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
+					//if(!game.getPlayer().doABet(amount, betSelected))JOptionPane.showMessageDialog(null, "You don`t have money");;
 					representMoney();
 					representBets();
 					btnNoMoreBets.setEnabled(true);
@@ -456,7 +471,7 @@ public class MainWindow extends JFrame {
 		if (btnNoMoreBets == null) {
 			btnNoMoreBets = new JButton("No more bets!");
 			btnNoMoreBets.setMnemonic(KeyEvent.VK_N);
-			btnNoMoreBets.setBounds(148, 131, 107, 23);
+			btnNoMoreBets.setBounds(124, 131, 131, 23);
 			btnNoMoreBets.setEnabled(false);
 			btnNoMoreBets.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -487,7 +502,7 @@ public class MainWindow extends JFrame {
 	private JTextField getTfNumber() {
 		if (tfNumber == null) {
 			tfNumber = new JTextField();
-			tfNumber.setBounds(10, 5, 220, 62);
+			tfNumber.setBounds(10, 5, 220, 80);
 			tfNumber.setHorizontalAlignment(SwingConstants.CENTER);
 			tfNumber.setFont(new Font("Tahoma", Font.BOLD, 30));
 			tfNumber.setBackground(new Color(153, 204, 255));
@@ -513,7 +528,7 @@ public class MainWindow extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(349, 78, 375, 140);
+			scrollPane.setBounds(349, 78, 375, 124);
 			scrollPane.setViewportView(getTbBets());
 		}
 		return scrollPane;
@@ -562,7 +577,7 @@ public class MainWindow extends JFrame {
 		if(processEven == null) {
 			processEven = new JProgressBar();
 			processEven.setValue(50);
-			processEven.setForeground(Color.ORANGE);
+			processEven.setForeground(new Color(160, 82, 45));
 			processEven.setBackground(Color.CYAN);
 			processEven.setBounds(215, 34, 150, 30);
 			processEven.setStringPainted(true);
@@ -572,7 +587,7 @@ public class MainWindow extends JFrame {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBounds(349, 229, 375, 136);
+			panel_1.setBounds(349, 213, 375, 152);
 			panel_1.setLayout(null);
 			//panel_1.add(getTxRedBlack());
 			panel_1.add(getEvenOddProcess());
@@ -592,16 +607,17 @@ public class MainWindow extends JFrame {
 			lblMoney.setForeground(Color.WHITE);
 			lblMoney.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblMoney.setIcon(new ImageIcon(MainWindow.class.getResource("/img/image-2015-11-06 (1).png")));
-			lblMoney.setBounds(349, 25, 120, 33);
+			lblMoney.setBounds(349, 20, 120, 33);
 		}
 		return lblMoney;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("Winner Number");
+			lblNewLabel.setForeground(new Color(255, 255, 255));
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setBounds(30, 12, 265, 27);
+			lblNewLabel.setBounds(30, 20, 265, 27);
 		}
 		return lblNewLabel;
 	}
@@ -696,6 +712,7 @@ public class MainWindow extends JFrame {
 	private JTextField getTfHotNumbers() {
 		if (tfHotNumbers == null) {
 			tfHotNumbers = new JTextField();
+			tfHotNumbers.setForeground(new Color(255, 0, 0));
 			tfHotNumbers.setBounds(21, 105, 150, 20);
 			tfHotNumbers.setColumns(10);
 		}
@@ -704,6 +721,7 @@ public class MainWindow extends JFrame {
 	private JTextField getTfColdNumbers() {
 		if (tfColdNumbers == null) {
 			tfColdNumbers = new JTextField();
+			tfColdNumbers.setForeground(new Color(105, 105, 105));
 			tfColdNumbers.setColumns(10);
 			tfColdNumbers.setBounds(215, 105, 150, 20);
 		}
@@ -729,7 +747,7 @@ public class MainWindow extends JFrame {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
 			panel_2.setBackground(contentPane.getBackground());
-			panel_2.setBounds(40, 49, 240, 108);
+			panel_2.setBounds(30, 58, 240, 131);
 			panel_2.setLayout(null);
 			panel_2.add(getTfNumber());
 			panel_2.add(getLblColor());
@@ -739,9 +757,10 @@ public class MainWindow extends JFrame {
 	private JLabel getLblColor() {
 		if (lblColor == null) {
 			lblColor = new JLabel("");
+			lblColor.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			lblColor.setHorizontalAlignment(SwingConstants.CENTER);
 			lblColor.setForeground(new Color(255, 255, 255));
-			lblColor.setBounds(10, 83, 220, 14);
+			lblColor.setBounds(10, 96, 220, 37);
 		}
 		return lblColor;
 	}

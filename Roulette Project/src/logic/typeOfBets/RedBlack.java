@@ -26,7 +26,8 @@ public class RedBlack extends TypeOfBet {
 
 	@Override
 	public String printInfo() {
+		if(color.equals(Color.BLACK))return "Black";
+		else return "Red";
 		
-		return color.toString();
 	}
 }

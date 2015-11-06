@@ -88,7 +88,8 @@ public class Player {
 	public boolean doABet(int amount, TypeOfBet typeOfBet) { 
 		if(amount<=money){ 
 			Bet bet = new Bet(amount, typeOfBet); 
-			bets.add(bet); 
+			bets.add(bet);
+			
 			money=money-amount; 
 			return true; 
 		} 
