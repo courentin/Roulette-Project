@@ -40,7 +40,7 @@ public class Game {
 	}
 	
 	public List<Integer> getHotColdNumbers() {
-		int[][] numbers = new int[37][2];
+		Integer[][] numbers = new Integer[37][2];
 		
 		for(int i=0; i<37; i++) {
 			numbers[i][0] = i;
@@ -49,7 +49,11 @@ public class Game {
 			}
 		}
 		
-		Arrays.sort(numbers);
+		Arrays.sort(numbers, new java.util.Comparator<Integer[]>() {
+		    public int compare(Integer[] a, Integer[] b) {
+		        return Integer.compare(a[0], b[0]);
+		    }
+		});
 		List<Integer> hotCold = new ArrayList<>();
 		
 		for(int j=0; j<4; j++) {
