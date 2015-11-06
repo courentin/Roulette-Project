@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
@@ -78,6 +79,8 @@ public class MainWindow extends JFrame {
 	private JLabel lblTypeOfBet;
 	private JLabel lblOption;
 	private JLabel lblAmount;
+	private JProgressBar process;
+	private JProgressBar processEven;
 	//private JScrollPane scrollPane;
 
 
@@ -154,9 +157,7 @@ public class MainWindow extends JFrame {
 	}
 
 	private void representMoney() {
-		double money = game.getPlayer().getMoney();
 		lblMoney.setText(String.valueOf(game.getPlayer().getMoney())+"\u20ac");
-
 	}
 
 
@@ -230,7 +231,7 @@ public class MainWindow extends JFrame {
 			mntmAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 			mntmAbout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					JOptionPane.showMessageDialog(contentPane, "Collaboration Project EII Oviedo - Université de Valenciennes", "About Roulette",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(contentPane, "Collaboration Project EII Oviedo - Universitï¿½ de Valenciennes", "About Roulette",JOptionPane.INFORMATION_MESSAGE);
 
 				}
 			});
@@ -412,9 +413,10 @@ public class MainWindow extends JFrame {
 
 					btnNoMoreBets.setEnabled(false);
 					representMoney();
-					txRedBlack.setText(game.getRedBlackStatistics().toString());
-					txEvenOdd.setText(game.getEvenOddStatistics().toString());
-
+					//txRedBlack.setText(game.getRedBlackStatistics().toString());
+					//txEvenOdd.setText(game.getEvenOddStatistics().toString());
+					process.setValue((int) Math.round(game.getRedBlackStatistics().get(0)*100));
+					processEven.setValue((int) Math.round(game.getEvenOddStatistics().get(0)*100));
 				}
 			});
 		}
@@ -435,14 +437,14 @@ public class MainWindow extends JFrame {
 	private JTextPane getTxEvenOdd() {
 		if (txEvenOdd == null) {
 			txEvenOdd = new JTextPane();
-			txEvenOdd.setBounds(243, 50, 108, 63);
+			//txEvenOdd.setBounds(243, 50, 108, 63);
 		}
 		return txEvenOdd;
 	}
 	private JTextPane getTxRedBlack() {
 		if (txRedBlack == null) {
 			txRedBlack = new JTextPane();
-			txRedBlack.setBounds(10, 50, 108, 63);
+			//txRedBlack.setBounds(10, 50, 108, 63);
 		}
 		return txRedBlack;
 	}
@@ -479,13 +481,36 @@ public class MainWindow extends JFrame {
 		}
 		return panel;
 	}
+	private JProgressBar getRedBlackProcess() {
+		if(process == null) {
+			process = new JProgressBar();
+			process.setValue(50);
+			process.setForeground(Color.RED);
+			process.setBackground(Color.BLACK);
+			process.setBounds(20, 20, 150, 30);
+			process.setStringPainted(true);
+		}
+		return process;
+	}
+	private JProgressBar getEvenOddProcess() {
+		if(processEven == null) {
+			processEven = new JProgressBar();
+			processEven.setValue(50);
+			processEven.setForeground(Color.ORANGE);
+			processEven.setBackground(Color.CYAN);
+			processEven.setBounds(210, 20, 150, 30);
+			processEven.setStringPainted(true);
+		}
+		return processEven;
+	}
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
 			panel_1.setBounds(349, 229, 375, 136);
 			panel_1.setLayout(null);
-			panel_1.add(getTxRedBlack());
-			panel_1.add(getTxEvenOdd());
+			//panel_1.add(getTxRedBlack());
+			panel_1.add(getEvenOddProcess());
+			panel_1.add(getRedBlackProcess());
 		}
 		return panel_1;
 	}
