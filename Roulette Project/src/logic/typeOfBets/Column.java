@@ -22,7 +22,7 @@ public class Column extends TypeOfBet {
 	@Override
 	public String printInfo() {
 		
-		return String.valueOf(columnBeted);
+		return "Column: "+String.valueOf(columnBeted);
 	}
 
 	
