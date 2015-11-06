@@ -2,7 +2,7 @@ package logic;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import logic.typeOfBets.Column;
@@ -38,19 +38,27 @@ public class Game {
 		player.executeBets(number);
 		return number;
 	}
-
-	/*
-	public List<Number> getHotNumbers() {
-		List<Number> ordered = history;
-		for(Number number : history) {
-			
+	
+	public List<Integer> getHotColdNumbers() {
+		int[][] numbers = new int[37][2];
+		
+		for(int i=0; i<37; i++) {
+			numbers[i][0] = i;
+			for(Number number : history) {
+				if(number.getValue() == i) numbers[i][1]++;
+			}
 		}
 		
-		Collections.sort(ordered);
+		Arrays.sort(numbers);
+		List<Integer> hotCold = new ArrayList<>();
 		
-		return ordered.subList(0, 3);
+		for(int j=0; j<4; j++) {
+			hotCold.set(j, numbers[j][0]);
+			hotCold.set(7-j, numbers[36-j][0]);
+		}
+		
+		return hotCold;
 	}
-	*/
 	
 	 /**
 	  * 
